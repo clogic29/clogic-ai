@@ -55,3 +55,8 @@ async def upsert_collection(texts: list[str]):
     for arg in get_args(EmbeddingModel):
         qdrant_service.upsert(model_name=arg, texts=texts)
     return {"message": "Collection upserted successfully"}
+
+
+@app.get('/health')
+async def health():
+    return {"message": "OK"}
