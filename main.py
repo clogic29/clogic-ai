@@ -114,6 +114,7 @@ async def process_slack_interaction(channel_id: str, command_text: str):
                     response_chunks.append(chunk)
             
             response_text = ''.join(response_chunks)
+            response_text = f"LLM 답변 : \n```{response_text}```"
         else:
             response_text = f"'{command_text}'에 대한 정보를 찾을 수 없습니다."
         
