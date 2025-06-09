@@ -1,4 +1,5 @@
 [tool.poetry]
+package-mode = false
 name = "ai-introduce-myself"
 version = "0.1.0"
 description = ""
