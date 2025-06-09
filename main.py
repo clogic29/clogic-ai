@@ -128,7 +128,7 @@ async def process_slack_interaction(channel_id: str, command_text: str):
         await slack_client.chat_update(
             channel=channel_id,
             ts=loading_response["ts"],
-            text='답변 완료'
+            text='답변 완료 :white_check_mark:'
         )
         
     except Exception as e:
