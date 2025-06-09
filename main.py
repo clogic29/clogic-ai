@@ -120,7 +120,7 @@ async def process_slack_interaction(channel_id: str, command_text: str):
         # 로딩 메시지를 실제 AI 응답으로 업데이트
         await slack_client.chat_postMessage(
             channel=channel_id,
-            ts=initial_response["ts"],
+            thread_ts=initial_response["ts"],
             text=response_text
         )
 
