@@ -74,7 +74,7 @@ async def process_slack_interaction(channel_id: str, command_text: str):
         loading_response = await slack_client.chat_postMessage(
             channel=channel_id,
             thread_ts=initial_response["ts"],
-            text="벡터 DB에 질의 중..."
+            text="벡터 DB 질의 중 :loading:"
         )
         
         # AI 응답 생성
@@ -91,7 +91,7 @@ async def process_slack_interaction(channel_id: str, command_text: str):
         await slack_client.chat_update(
             channel=channel_id,
             ts=loading_response["ts"],
-            text='LLM에 질의 중...'
+            text='LLM 질의 중 :loading:'
         )
         
         if retrieved_context:
