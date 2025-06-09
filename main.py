@@ -123,6 +123,12 @@ async def process_slack_interaction(channel_id: str, command_text: str):
             ts=initial_response["ts"],
             text=response_text
         )
+
+        await slack_client.chat_update(
+            channel=channel_id,
+            ts=loading_response["ts"],
+            text='답변 완료'
+        )
         
     except Exception as e:
         # 에러 발생 시 에러 메시지 전송
