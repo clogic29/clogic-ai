@@ -74,12 +74,25 @@ async def process_slack_interaction(channel_id: str, command_text: str):
         loading_response = await slack_client.chat_postMessage(
             channel=channel_id,
             thread_ts=initial_response["ts"],
-            text="로딩 중..."
+            text="벡터 DB에 질의 중..."
         )
         
         # AI 응답 생성
         results = qdrant_service.query(model_name='BAAI/bge-m3', query=command_text, limit=3)
         retrieved_context = '\n'.join([hit.payload['text'] for hit in results.points])
+
+        await slack_client.chat_postMessage(
+            channel=channel_id,
+            thread_ts=initial_response["ts"],
+            text=f"벡터 DB 질의 결과 : \n```{retrieved_context}```"
+        )
+        
+
+        await slack_client.chat_update(
+            channel=channel_id,
+            ts=loading_response["ts"],
+            text='LLM에 질의 중...'
+        )
         
         if retrieved_context:
             prompt = f"""
